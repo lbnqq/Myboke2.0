@@ -66,6 +66,7 @@
                     'zootopia-back-to-top',
                     'zootopia-bookmarks',
                     'zootopia-search-suggestions',
+                    'zootopia-search-advanced',
                     'zootopia-community',
                     'zootopia-theme-features',
                     'zootopia-ui-components',
@@ -236,6 +237,16 @@
                 }
             }
 
+            // 初始化高级搜索功能（第33轮新增）
+            if (window.ZootopiaCore && window.ZootopiaCore.advancedSearch && typeof window.ZootopiaCore.advancedSearch.init === 'function') {
+                try {
+                    window.ZootopiaCore.advancedSearch.init();
+                    log('高级搜索功能已初始化');
+                } catch (e) {
+                    log(`高级搜索功能初始化失败: ${e.message}`, 'error');
+                }
+            }
+
             // 可以在这里添加其他组件的初始化逻辑
             log(`所有组件初始化完成 (耗时: ${Date.now() - this.loadStartTime}ms)`);
         }
@@ -326,7 +337,8 @@
             'zootopia-reading-progress.css',
             'zootopia-back-to-top.css',
             'zootopia-bookmarks.css',
-            'zootopia-search-suggestions.css'
+            'zootopia-search-suggestions.css',
+            'zootopia-search-advanced.css'
         ];
 
         criticalCSS.forEach(filename => {
