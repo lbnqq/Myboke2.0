@@ -1,0 +1,563 @@
+/**
+ * 疯狂动物城 - 书签功能样式
+ * Zootopia Bookmarks Styles
+ * Version: 1.0.0
+ */
+
+/* ========================================
+   书签按钮样式
+   ======================================== */
+.zootopia-bookmark-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 159, 67, 0.3);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--zt-primary, #FF9F43);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.zootopia-bookmark-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 159, 67, 0.3);
+}
+
+.zootopia-bookmark-button:focus-visible {
+  outline: 3px solid var(--zt-secondary, #0ABDE3);
+  outline-offset: 2px;
+}
+
+.zootopia-bookmark-button:active {
+  transform: translateY(0);
+}
+
+/* 已收藏状态 */
+.zootopia-bookmark-button[data-bookmarked="true"],
+.zootopia-bookmark-button.bookmarked {
+  background: linear-gradient(135deg, var(--zt-primary, #FF9F43), var(--zt-secondary, #0ABDE3));
+  border: none;
+  color: white;
+}
+
+/* ========================================
+   浮动按钮
+   ======================================== */
+.zootopia-bookmarks-float {
+  position: fixed;
+  right: 24px;
+  bottom: 100px;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, var(--zt-primary, #FF9F43), var(--zt-secondary, #0ABDE3));
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 9997;
+  box-shadow: 0 4px 16px rgba(255, 159, 67, 0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.zootopia-bookmarks-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 24px rgba(255, 159, 67, 0.6);
+}
+
+.zootopia-bookmarks-float:active {
+  transform: scale(1.05);
+}
+
+/* ========================================
+   侧边栏
+   ======================================== */
+.zootopia-bookmarks-sidebar {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%) scale(0.95);
+  width: 280px;
+  max-height: 80vh;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  z-index: 9998;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  pointer-events: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.zootopia-bookmarks-sidebar.zootopia-bookmarks-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%) scale(1);
+}
+
+.zootopia-bookmarks-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--zt-primary, #FF9F43), var(--zt-secondary, #0ABDE3));
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.zootopia-bookmarks-toggle {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border: none !important;
+  border-radius: 50% !important;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  color: white;
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.zootopia-bookmarks-toggle:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+.zootopia-bookmarks-content {
+  padding: 12px;
+  overflow-y: auto;
+  max-height: calc(80vh - 60px);
+}
+
+/* 滚动条样式 */
+.zootopia-bookmarks-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.zootopia-bookmarks-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+}
+
+.zootopia-bookmarks-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 159, 67, 0.4);
+  border-radius: 3px;
+}
+
+.zootopia-bookmarks-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 159, 67, 0.6);
+}
+
+/* ========================================
+   书签项
+   ======================================== */
+.zootopia-bookmark-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.6);
+  margin-bottom: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.zootopia-bookmark-item:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 159, 67, 0.2);
+  transform: translateX(-4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.zootopia-bookmark-item-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--zt-primary, #FF9F43), var(--zt-secondary, #0ABDE3));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.zootopia-bookmark-item-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.zootopia-bookmark-item-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  line-height: 1.4;
+  margin-bottom: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.zootopia-bookmark-item-meta {
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.zootopia-bookmark-item-date {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.zootopia-bookmark-item-read {
+  color: var(--zt-secondary, #0ABDE3);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.zootopia-bookmark-item-remove {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 16px;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.zootopia-bookmark-item-remove:hover {
+  background: rgba(255, 0, 0, 0.1);
+  color: rgba(255, 0, 0, 0.6);
+}
+
+/* ========================================
+   空状态
+   ======================================== */
+.zootopia-bookmarks-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 14px;
+}
+
+.zootopia-bookmarks-empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.zootopia-bookmarks-empty-text {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.zootopia-bookmarks-empty-hint {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+/* ========================================
+   侧边栏工具栏
+   ======================================== */
+.zootopia-bookmarks-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 4px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  margin-bottom: 8px;
+}
+
+.zootopia-bookmarks-count {
+  font-weight: 500;
+}
+
+.zootopia-bookmarks-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.zootopia-bookmarks-action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--zt-primary, #FF9F43);
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.zootopia-bookmarks-action-btn:hover {
+  background: rgba(255, 159, 67, 0.1);
+}
+
+.zootopia-bookmarks-action-btn.danger {
+  color: rgba(255, 0, 0, 0.6);
+}
+
+.zootopia-bookmarks-action-btn.danger:hover {
+  background: rgba(255, 0, 0, 0.1);
+}
+
+/* ========================================
+   通知
+   ======================================== */
+.zootopia-bookmarks-notification {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--zt-primary, #FF9F43), var(--zt-secondary, #0ABDE3));
+  color: white;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 10000;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.zootopia-bookmarks-notification.zootopia-bookmarks-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ========================================
+   暗色模式
+   ======================================== */
+@media (prefers-color-scheme: dark) {
+  .zootopia-bookmark-button {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 159, 67, 0.2);
+    color: var(--zt-primary, #FF9F43);
+  }
+
+  .zootopia-bookmark-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .zootopia-bookmarks-sidebar {
+    background: rgba(30, 30, 30, 0.95);
+  }
+
+  .zootopia-bookmark-item {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .zootopia-bookmark-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .zootopia-bookmark-item-title {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .zootopia-bookmark-item-meta {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .zootopia-bookmarks-toolbar {
+    color: rgba(255, 255, 255, 0.6);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .zootopia-bookmarks-empty {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .zootopia-bookmarks-empty-hint {
+    color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+@media (max-width: 768px) {
+  .zootopia-bookmarks-sidebar {
+    right: 10px;
+    left: 10px;
+    width: auto;
+    max-height: 70vh;
+    top: auto;
+    bottom: 20px;
+    transform: scale(0.95) translateY(0);
+    border-radius: 12px;
+  }
+
+  .zootopia-bookmarks-sidebar.zootopia-bookmarks-visible {
+    transform: scale(1) translateY(0);
+  }
+
+  .zootopia-bookmarks-float {
+    right: 16px;
+    bottom: 90px;
+    width: 52px;
+    height: 52px;
+  }
+
+  .zootopia-bookmark-button {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .zootopia-bookmarks-sidebar {
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    max-height: 60vh;
+    border-radius: 10px;
+  }
+
+  .zootopia-bookmark-item {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .zootopia-bookmark-item-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .zootopia-bookmark-item-title {
+    font-size: 12px;
+  }
+
+  .zootopia-bookmark-item-meta {
+    font-size: 10px;
+  }
+}
+
+/* ========================================
+   触摸设备优化
+   ======================================== */
+@media (hover: none) and (pointer: coarse) {
+  .zootopia-bookmark-button {
+    padding: 10px 20px;
+    min-height: 44px;
+  }
+
+  .zootopia-bookmarks-float {
+    width: 60px;
+    height: 60px;
+    bottom: 110px;
+  }
+
+  .zootopia-bookmark-item {
+    padding: 14px;
+  }
+
+  .zootopia-bookmark-item-remove {
+    min-width: 32px;
+    min-height: 32px;
+  }
+}
+
+/* ========================================
+   辅助功能
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  .zootopia-bookmark-button,
+  .zootopia-bookmarks-float,
+  .zootopia-bookmarks-sidebar,
+  .zootopia-bookmark-item,
+  .zootopia-bookmarks-notification {
+    transition: none !important;
+  }
+}
+
+/* ========================================
+   打印优化
+   ======================================== */
+@media print {
+  .zootopia-bookmark-button,
+  .zootopia-bookmarks-float,
+  .zootopia-bookmarks-sidebar,
+  .zootopia-bookmarks-notification {
+    display: none !important;
+  }
+}
+
+/* ========================================
+   动画效果
+   ======================================== */
+@keyframes bookmarkPulse {
+  0%, 100% {
+    box-shadow: 0 4px 16px rgba(255, 159, 67, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 24px rgba(255, 159, 67, 0.6);
+  }
+}
+
+.zootopia-bookmark-button.bookmarked,
+.zootopia-bookmarks-float {
+  animation: bookmarkPulse 2s infinite ease-in-out;
+}
+
+@keyframes bookmarkSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.zootopia-bookmarks-notification.zootopia-bookmarks-visible {
+  animation: bookmarkSlideIn 0.3s ease-out;
+}
+
+@keyframes bookmarkItemAppear {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.zootopia-bookmark-item {
+  animation: bookmarkItemAppear 0.3s ease-out;
+}

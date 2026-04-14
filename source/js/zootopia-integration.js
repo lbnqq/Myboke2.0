@@ -21,6 +21,7 @@
         'zootopia-community': ['zootopia-core'],
         'zootopia-reading-progress': ['zootopia-core'],
         'zootopia-back-to-top': ['zootopia-core'],
+        'zootopia-bookmarks': ['zootopia-core'],
         'zootopia-performance-dashboard': ['zootopia-core'],
         'zootopia-easter-eggs': ['zootopia-core'],
         'zootopia-theme-features': ['zootopia-core'],
@@ -63,6 +64,7 @@
                     'zootopia-dialogue-bubbles',
                     'zootopia-reading-progress',
                     'zootopia-back-to-top',
+                    'zootopia-bookmarks',
                     'zootopia-community',
                     'zootopia-theme-features',
                     'zootopia-ui-components',
@@ -213,6 +215,16 @@
                 }
             }
 
+            // 初始化书签功能（第31轮新增）
+            if (window.Bookmarks && typeof window.Bookmarks.init === 'function') {
+                try {
+                    window.Bookmarks.init();
+                    log('书签功能已初始化');
+                } catch (e) {
+                    log(`书签功能初始化失败: ${e.message}`, 'error');
+                }
+            }
+
             // 可以在这里添加其他组件的初始化逻辑
             log(`所有组件初始化完成 (耗时: ${Date.now() - this.loadStartTime}ms)`);
         }
@@ -301,7 +313,8 @@
             'zootopia-dialogue-bubbles.css',
             'zootopia-community.css',
             'zootopia-reading-progress.css',
-            'zootopia-back-to-top.css'
+            'zootopia-back-to-top.css',
+            'zootopia-bookmarks.css'
         ];
 
         criticalCSS.forEach(filename => {

@@ -8,7 +8,8 @@
       "mcp__open-websearch__search",
       "mcp__serena__find_symbol",
       "Bash(hexo generate:*)",
-      "Bash(cd \"G:\\\\个人博客网站\\\\my-blog\" && npm run deploy)"
+      "Bash(cd \"G:\\\\个人博客网站\\\\my-blog\" && npm run deploy)",
+      "Bash(cd \"G:\\\\个人博客网站\\\\my-blog\" && hexo clean && hexo generate)"
     ]
   }
 }
