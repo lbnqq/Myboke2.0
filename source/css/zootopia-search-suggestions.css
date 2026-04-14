@@ -1,0 +1,387 @@
+/**
+ * 疯狂动物城 - 搜索建议样式
+ * Zootopia Search Suggestions Styles
+ * Version: 1.0.0
+ */
+
+/* ========================================
+   搜索建议容器
+   ======================================== */
+.zt-search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 10000;
+  margin-top: 4px;
+  overflow: hidden;
+  display: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  border: 1px solid rgba(255, 159, 67, 0.15);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.zt-search-suggestions.zt-suggestions-visible {
+  display: block;
+  animation: ztSuggestionsSlideIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes ztSuggestionsSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   头部
+   ======================================== */
+.zt-suggestions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, rgba(255, 159, 67, 0.08), rgba(10, 189, 227, 0.08));
+  border-bottom: 1px solid rgba(255, 159, 67, 0.1);
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.zt-suggestions-title {
+  font-weight: 600;
+  color: var(--zt-primary, #FF9F43);
+}
+
+.zt-suggestions-shortcut {
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* ========================================
+   建议列表
+   ======================================== */
+.zt-suggestions-list {
+  padding: 4px;
+}
+
+.zt-suggestion-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid transparent;
+}
+
+.zt-suggestion-item:hover,
+.zt-suggestion-item.zt-suggestion-active {
+  background: rgba(255, 159, 67, 0.08);
+  border-color: rgba(255, 159, 67, 0.2);
+}
+
+.zt-suggestion-item.zt-suggestion-active {
+  background: linear-gradient(135deg, rgba(255, 159, 67, 0.12), rgba(10, 189, 227, 0.08));
+}
+
+.zt-suggestion-icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--zt-primary, #FF9F43), var(--zt-secondary, #0ABDE3));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+}
+
+.zt-suggestion-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+.zt-suggestion-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.zt-suggestion-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  line-height: 1.4;
+  margin-bottom: 4px;
+  word-break: break-word;
+}
+
+.zt-suggestion-meta {
+  display: flex;
+  gap: 8px;
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.5);
+  flex-wrap: wrap;
+}
+
+.zt-suggestion-category {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--zt-secondary, #0ABDE3);
+  font-weight: 500;
+}
+
+.zt-suggestion-date {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+/* 高亮匹配文本 */
+.zt-suggestion-highlight {
+  background: linear-gradient(135deg, rgba(255, 159, 67, 0.3), rgba(10, 189, 227, 0.3));
+  color: var(--zt-primary, #FF9F43);
+  font-weight: 600;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* ========================================
+   空状态
+   ======================================== */
+.zt-suggestion-empty {
+  padding: 24px 12px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 13px;
+}
+
+/* ========================================
+   底部提示
+   ======================================== */
+.zt-suggestions-footer {
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.02);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.zt-suggestions-hint kbd {
+  display: inline-block;
+  padding: 2px 6px;
+  margin: 0 2px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================
+   滚动条样式
+   ======================================== */
+.zt-search-suggestions::-webkit-scrollbar {
+  width: 6px;
+}
+
+.zt-search-suggestions::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 3px;
+}
+
+.zt-search-suggestions::-webkit-scrollbar-thumb {
+  background: rgba(255, 159, 67, 0.4);
+  border-radius: 3px;
+}
+
+.zt-search-suggestions::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 159, 67, 0.6);
+}
+
+/* ========================================
+   暗色模式
+   ======================================== */
+@media (prefers-color-scheme: dark) {
+  .zt-search-suggestions {
+    background: rgba(30, 30, 30, 0.98);
+    border-color: rgba(255, 159, 67, 0.2);
+  }
+
+  .zt-suggestions-header {
+    background: linear-gradient(135deg, rgba(255, 159, 67, 0.12), rgba(10, 189, 227, 0.12));
+    border-bottom-color: rgba(255, 159, 67, 0.15);
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .zt-suggestions-title {
+    color: var(--zt-primary, #FF9F43);
+  }
+
+  .zt-suggestion-item {
+    border-color: transparent;
+  }
+
+  .zt-suggestion-item:hover,
+  .zt-suggestion-item.zt-suggestion-active {
+    background: rgba(255, 159, 67, 0.12);
+    border-color: rgba(255, 159, 67, 0.25);
+  }
+
+  .zt-suggestion-item.zt-suggestion-active {
+    background: linear-gradient(135deg, rgba(255, 159, 67, 0.18), rgba(10, 189, 227, 0.12));
+  }
+
+  .zt-suggestion-title {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .zt-suggestion-meta {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .zt-suggestion-empty {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .zt-suggestions-footer {
+    background: rgba(255, 255, 255, 0.05);
+    border-top-color: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .zt-suggestions-hint kbd {
+    background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+@media (max-width: 768px) {
+  .zt-search-suggestions {
+    max-height: 350px;
+    font-size: 13px;
+  }
+
+  .zt-suggestion-item {
+    padding: 12px 10px;
+    gap: 8px;
+  }
+
+  .zt-suggestion-icon {
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+  }
+
+  .zt-suggestion-title {
+    font-size: 12px;
+  }
+
+  .zt-suggestion-meta {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .zt-search-suggestions {
+    max-height: 300px;
+  }
+
+  .zt-suggestion-item {
+    padding: 10px;
+  }
+
+  .zt-suggestion-icon {
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
+  }
+
+  .zt-suggestion-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .zt-suggestion-title {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .zt-suggestion-meta {
+    font-size: 10px;
+  }
+
+  .zt-suggestions-header {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .zt-suggestions-footer {
+    padding: 5px 10px;
+    font-size: 10px;
+  }
+
+  .zt-suggestions-hint kbd {
+    padding: 1px 4px;
+    font-size: 9px;
+  }
+}
+
+/* ========================================
+   触摸设备优化
+   ======================================== */
+@media (hover: none) and (pointer: coarse) {
+  .zt-suggestion-item {
+    padding: 14px 12px;
+    min-height: 52px;
+  }
+
+  .zt-suggestion-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+}
+
+/* ========================================
+   辅助功能
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  .zt-search-suggestions,
+  .zt-suggestion-item,
+  .zt-suggestion-highlight {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+@media print {
+  .zt-search-suggestions {
+    display: none !important;
+  }
+}
+
+/* ========================================
+   焦点管理
+   ======================================== */
+.zt-suggestion-item:focus-visible {
+  outline: 2px solid var(--zt-secondary, #0ABDE3);
+  outline-offset: 2px;
+}
