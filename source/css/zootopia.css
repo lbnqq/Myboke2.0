@@ -266,6 +266,63 @@ hr {
   box-shadow: 0 8px 25px rgba(255, 159, 67, 0.2);
 }
 
+/* 文章正文阅读体验优化 */
+#article-container p {
+  line-height: 1.9;
+  margin-bottom: 1.2em;
+}
+
+#article-container h2 {
+  position: relative;
+  padding-left: 14px;
+  margin-top: 2em;
+}
+
+#article-container h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 60%;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #FF9F43, #0ABDE3);
+}
+
+#article-container blockquote {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 8px 8px 0;
+  transition: box-shadow 0.3s ease;
+}
+
+#article-container blockquote:hover {
+  box-shadow: 0 2px 12px rgba(16, 172, 132, 0.15);
+}
+
+#article-container blockquote::after {
+  content: '\201C';
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  font-size: 3em;
+  color: rgba(16, 172, 132, 0.1);
+  font-family: Georgia, serif;
+  pointer-events: none;
+}
+
+#article-container ul li,
+#article-container ol li {
+  padding: 4px 0;
+  transition: transform 0.2s ease;
+}
+
+#article-container ul li:hover,
+#article-container ol li:hover {
+  transform: translateX(4px);
+}
+
 /* 返回顶部按钮 */
 #rightside {
   transition: all 0.3s ease;
