@@ -57,12 +57,63 @@ a:hover {
 
 /* 文章卡片悬浮效果 */
 .card-widget {
-  transition: all 0.3s ease;
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: 1px solid rgba(255, 159, 67, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
 }
 
 .card-widget:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  box-shadow:
+    0 4px 16px rgba(255, 159, 67, 0.1),
+    0 12px 32px rgba(10, 189, 227, 0.08);
+  border-color: rgba(255, 159, 67, 0.18);
+}
+
+/* 侧边栏信息卡片毛玻璃 */
+#sidebar .card-widget {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* 卡片标题左侧主题色指示条 */
+.card-widget .item-headline {
+  position: relative;
+  padding-left: 12px;
+}
+
+.card-widget .item-headline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 16px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #FF9F43, #0ABDE3);
+}
+
+/* 侧边栏卡片入场动画 */
+#sidebar .card-widget {
+  opacity: 0;
+  transform: translateX(20px);
+  animation: sidebar-card-enter 0.5s ease forwards;
+}
+
+#sidebar .card-widget:nth-child(1) { animation-delay: 0.1s; }
+#sidebar .card-widget:nth-child(2) { animation-delay: 0.2s; }
+#sidebar .card-widget:nth-child(3) { animation-delay: 0.3s; }
+#sidebar .card-widget:nth-child(4) { animation-delay: 0.4s; }
+#sidebar .card-widget:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes sidebar-card-enter {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* 标签云多彩效果 */
