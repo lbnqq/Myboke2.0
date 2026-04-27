@@ -291,6 +291,48 @@
       // 观察所有需要动画的元素
       const elements = document.querySelectorAll('[data-appear]');
       elements.forEach(el => this.intersectionObserver.observe(el));
+
+      // 自动为文章内容元素添加入场动画
+      this.autoAnimateArticleContent();
+    },
+
+    /**
+     * 自动为文章内容添加入场动画
+     * 标题、段落、图片、引用块依次渐入，形成阅读节奏
+     */
+    autoAnimateArticleContent: function() {
+      var container = document.getElementById('article-container');
+      if (!container) return;
+
+      var targets = container.querySelectorAll(
+        'h2, h3, p, img, blockquote, table, .highlight'
+      );
+
+      if (!targets.length) return;
+
+      // 设置初始隐藏状态
+      targets.forEach(function(el) {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(12px)';
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      });
+
+      var articleObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var el = entry.target;
+            var idx = Array.from(targets).indexOf(el);
+            var stagger = Math.min(idx * 60, 400);
+            setTimeout(function() {
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0)';
+            }, stagger);
+            articleObserver.unobserve(el);
+          }
+        });
+      }, { threshold: 0.05, rootMargin: '30px' });
+
+      targets.forEach(function(el) { articleObserver.observe(el); });
     },
 
     /**
