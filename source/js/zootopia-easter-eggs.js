@@ -184,6 +184,9 @@
         // 添加键盘快捷键
         addKeyboardShortcuts();
 
+        // 页面加载随机欢迎彩蛋
+        scheduleWelcomeEgg();
+
         console.log('🥚 疯狂动物城彩蛋系统已启动');
     }
 
@@ -361,6 +364,46 @@
                 triggerRandomEgg();
             }
         });
+    }
+
+    /**
+     * 页面加载随机欢迎彩蛋
+     * 每个会话只触发一次，延迟2-4秒随机出现
+     */
+    function scheduleWelcomeEgg() {
+        // 每个会话只触发一次
+        if (sessionStorage.getItem('zt_welcomed')) return;
+        sessionStorage.setItem('zt_welcomed', '1');
+
+        // 随机延迟 2-4 秒
+        var delay = 2000 + Math.floor(Math.random() * 2000);
+
+        setTimeout(function() {
+            // 随机选一个角色
+            var charIds = Object.keys(EASTER_EGGS);
+            var charId = charIds[Math.floor(Math.random() * charIds.length)];
+            var char = EASTER_EGGS[charId];
+            var reaction = char.reactions[Math.floor(Math.random() * char.reactions.length)];
+
+            // 创建右下角欢迎气泡
+            var toast = document.createElement('div');
+            toast.className = 'zt-egg-bubble zt-welcome-toast';
+            toast.innerHTML =
+                '<span class="zt-egg-emoji">' + char.emoji + '</span>' +
+                '<span class="zt-egg-text">' + char.name + '：' + reaction.text + '</span>';
+            toast.style.setProperty('--zt-egg-color', char.color);
+
+            document.body.appendChild(toast);
+
+            // 入场
+            setTimeout(function() { toast.classList.add('show'); }, 10);
+
+            // 3秒后离场
+            setTimeout(function() {
+                toast.classList.remove('show');
+                setTimeout(function() { toast.remove(); }, 400);
+            }, 3500);
+        }, delay);
     }
 
     /**
