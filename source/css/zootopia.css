@@ -112,6 +112,25 @@ hr {
   background: linear-gradient(90deg, transparent, #FF9F43, transparent);
 }
 
+/* 动物城天际线分割装饰 */
+.zootopia-skyline-divider {
+  text-align: center;
+  margin: 2em 0;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+
+.zootopia-skyline-divider:hover {
+  opacity: 1;
+}
+
+.zootopia-skyline-divider img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  filter: drop-shadow(0 2px 8px rgba(255, 159, 67, 0.15));
+}
+
 /* 页脚动画 */
 #footer {
   background: linear-gradient(135deg, rgba(255, 159, 67, 0.1), rgba(10, 189, 227, 0.1));
