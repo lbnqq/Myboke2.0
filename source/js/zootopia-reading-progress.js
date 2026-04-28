@@ -134,6 +134,16 @@
         box-shadow: 0 2px 8px rgba(255, 159, 67, 0.3);
       `;
 
+      // 末端光标：小爪印跟随
+      var cursor = document.createElement('span');
+      cursor.className = 'zt-progress-cursor';
+      cursor.innerHTML = '&#128062;'; // paw emoji
+      cursor.style.cssText =
+        'position:absolute;right:-6px;top:-4px;font-size:11px;' +
+        'opacity:0.7;transition:opacity 0.2s ease,transform 0.2s ease;' +
+        'transform:rotate(20deg);';
+      bar.appendChild(cursor);
+
       return bar;
     },
 
@@ -217,7 +227,8 @@
 
     // 更新进度显示
     update: function(progressBar) {
-      const progress = this.calculate();
+      var progress = this.calculate();
+      var prev = this._prevProgress || 0;
 
       if (progressBar.type === 'sidebar') {
         progressBar.fill.style.height = progress + '%';
@@ -234,6 +245,17 @@
           progressBar.container.style.opacity = '1';
         }
       }
+
+      // 100% 完成脉冲动画
+      if (progress >= 100 && prev < 100) {
+        progressBar.container.classList.add('zt-progress-done');
+        // 3秒后移除
+        setTimeout(function() {
+          progressBar.container.classList.remove('zt-progress-done');
+        }, 3000);
+      }
+
+      this._prevProgress = progress;
     }
   };
 
