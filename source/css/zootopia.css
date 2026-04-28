@@ -150,6 +150,87 @@ a:hover {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* 行内代码样式 */
+#article-container code:not([class]) {
+  background: linear-gradient(135deg, rgba(255, 159, 67, 0.1), rgba(10, 189, 227, 0.08));
+  color: #EE5A24;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 0.88em;
+  border: 1px solid rgba(255, 159, 67, 0.12);
+  transition: background 0.2s ease;
+}
+
+#article-container code:not([class]):hover {
+  background: linear-gradient(135deg, rgba(255, 159, 67, 0.18), rgba(10, 189, 227, 0.14));
+}
+
+[data-theme="dark"] #article-container code:not([class]) {
+  background: rgba(10, 189, 227, 0.12);
+  color: #48DBFB;
+  border-color: rgba(10, 189, 227, 0.15);
+}
+
+/* 文章内图片说明 */
+#article-container img + em,
+#article-container img + br + em {
+  display: block;
+  text-align: center;
+  font-size: 0.82em;
+  color: #999;
+  margin-top: 6px;
+  font-style: italic;
+}
+
+/* 文章内图片美化 */
+#article-container img {
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease;
+}
+
+#article-container img:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* 文章元信息区域 */
+.post-meta,
+.post-header-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 159, 67, 0.08);
+  margin-bottom: 1em;
+}
+
+.post-meta-item:not(:last-child)::after {
+  content: '·';
+  margin-left: 8px;
+  color: rgba(0, 0, 0, 0.15);
+  font-size: 0.8em;
+}
+
+/* 文章日期标签 */
+.post-meta time,
+.post-meta .post-meta-date {
+  position: relative;
+  padding-left: 16px;
+}
+
+.post-meta time::before,
+.post-meta .post-meta-date::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FF9F43, #0ABDE3);
+}
+
 /* 引用块增强 */
 blockquote {
   border-left: 4px solid #10AC84 !important;
