@@ -436,6 +436,38 @@ hr {
   background: linear-gradient(90deg, transparent, #0ABDE3, transparent);
 }
 
+/* 罗盘装饰元素 */
+.zootopia-compass {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  opacity: 0.6;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  animation: compass-spin 60s linear infinite;
+}
+
+.zootopia-compass:hover {
+  opacity: 0.9;
+  animation-play-state: paused;
+  transform: scale(1.1);
+}
+
+.zootopia-compass img {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes compass-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zootopia-compass {
+    animation: none;
+  }
+}
+
 /* 响应式调整 */
 @media (max-width: 768px) {
   #site-title {
