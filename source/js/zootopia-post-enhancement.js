@@ -76,6 +76,9 @@
 
       // 打印按钮
       this.addPrintButton();
+
+      // 阅读完毕检测
+      this.detectReadCompletion();
     },
 
     /**
@@ -454,6 +457,72 @@
       container.className = 'zt-print-button-container';
       container.appendChild(printButton);
       article.parentNode.insertBefore(container, article);
+    },
+
+    /**
+     * 检测阅读完毕，滚动到底部时显示完成提示
+     */
+    detectReadCompletion: function() {
+      var article = document.getElementById('article-container');
+      if (!article) return;
+
+      var postUrl = window.location.pathname;
+      var key = 'zt_read_' + postUrl;
+      var alreadyShown = sessionStorage.getItem(key);
+      if (alreadyShown) return;
+
+      var startScroll = window.scrollY;
+      var startTime = Date.now();
+      var completed = false;
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting && !completed) {
+            completed = true;
+            observer.disconnect();
+
+            var elapsed = Math.round((Date.now() - startTime) / 1000);
+            var mins = Math.floor(elapsed / 60);
+            var secs = elapsed % 60;
+            var timeStr = mins > 0 ? mins + '分' + secs + '秒' : secs + '秒';
+
+            var scrollPx = Math.round(window.scrollY - startScroll);
+
+            var banner = document.createElement('div');
+            banner.className = 'zt-read-complete';
+            banner.innerHTML =
+              '<div class="zt-read-complete-inner">' +
+                '<span class="zt-read-complete-icon">&#10003;</span>' +
+                '<div class="zt-read-complete-text">' +
+                  '<strong>阅读完毕</strong>' +
+                  '<span class="zt-read-complete-stats">用时 ' + timeStr + ' · 滚动 ' + scrollPx + 'px</span>' +
+                '</div>' +
+              '</div>';
+
+            var postNav = document.querySelector('.post-nav') ||
+                          document.querySelector('#post-comment') ||
+                          article.parentNode;
+            postNav.parentNode.insertBefore(banner, postNav);
+
+            setTimeout(function() {
+              banner.classList.add('show');
+            }, 50);
+
+            // 5秒后缩小
+            setTimeout(function() {
+              banner.classList.add('compact');
+            }, 5000);
+
+            sessionStorage.setItem(key, '1');
+          }
+        });
+      }, { threshold: 0.7 });
+
+      // 观察文章末尾
+      var lastChild = article.lastElementChild;
+      if (lastChild) {
+        observer.observe(lastChild);
+      }
     }
   };
 
