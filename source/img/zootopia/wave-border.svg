@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 60" width="1200" height="60" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="waveA" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF9F43;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#FF9F43;stop-opacity:0.15"/>
+    </linearGradient>
+    <linearGradient id="waveB" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0ABDE3;stop-opacity:0.15"/>
+      <stop offset="50%" style="stop-color:#0ABDE3;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#0ABDE3;stop-opacity:0.15"/>
+    </linearGradient>
+    <linearGradient id="waveC" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#10AC84;stop-opacity:0.1"/>
+      <stop offset="100%" style="stop-color:#10AC84;stop-opacity:0.55"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 第一层波浪 - 金橙（最上，最大振幅） -->
+  <path d="M0,25 C60,8 120,8 180,25 C240,42 300,42 360,25 C420,8 480,8 540,25 C600,42 660,42 720,25 C780,8 840,8 900,25 C960,42 1020,42 1080,25 C1140,8 1200,8 1200,25"
+        fill="none" stroke="url(#waveA)" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- 第二层波浪 - 冰蓝（中间层） -->
+  <path d="M0,32 C50,18 100,18 150,32 C200,46 250,46 300,32 C350,18 400,18 450,32 C500,46 550,46 600,32 C650,18 700,18 750,32 C800,46 850,46 900,32 C950,18 1000,18 1050,32 C1100,46 1150,46 1200,32"
+        fill="none" stroke="url(#waveB)" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- 第三层波浪 - 翠绿（最下，最小振幅） -->
+  <path d="M0,40 C40,30 80,30 120,40 C160,50 200,50 240,40 C280,30 320,30 360,40 C400,50 440,50 480,40 C520,30 560,30 600,40 C640,50 680,50 720,40 C760,30 800,30 840,40 C880,50 920,50 960,40 C1000,30 1040,30 1080,40 C1120,50 1160,50 1200,40"
+        fill="none" stroke="url(#waveC)" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- 波峰装饰点 -->
+  <circle cx="180" cy="25" r="2.5" fill="#FF9F43" opacity="0.4"/>
+  <circle cx="360" cy="25" r="2" fill="#FF9F43" opacity="0.3"/>
+  <circle cx="540" cy="25" r="2.5" fill="#FF9F43" opacity="0.35"/>
+  <circle cx="720" cy="25" r="2" fill="#FF9F43" opacity="0.3"/>
+  <circle cx="900" cy="25" r="2.5" fill="#FF9F43" opacity="0.4"/>
+  <circle cx="1080" cy="25" r="2" fill="#FF9F43" opacity="0.3"/>
+
+  <circle cx="150" cy="32" r="1.8" fill="#0ABDE3" opacity="0.35"/>
+  <circle cx="450" cy="32" r="1.8" fill="#0ABDE3" opacity="0.3"/>
+  <circle cx="750" cy="32" r="1.8" fill="#0ABDE3" opacity="0.35"/>
+  <circle cx="1050" cy="32" r="1.8" fill="#0ABDE3" opacity="0.3"/>
+
+  <circle cx="120" cy="40" r="1.5" fill="#10AC84" opacity="0.3"/>
+  <circle cx="480" cy="40" r="1.5" fill="#10AC84" opacity="0.25"/>
+  <circle cx="840" cy="40" r="1.5" fill="#10AC84" opacity="0.3"/>
+
+  <!-- 左端渐隐 -->
+  <rect x="0" y="0" width="40" height="60" fill="white" opacity="0">
+    <animate attributeName="opacity" from="0" to="0" dur="0.01s"/>
+  </rect>
+</svg>
